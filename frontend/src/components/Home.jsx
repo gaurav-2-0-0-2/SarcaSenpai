@@ -12,8 +12,10 @@ export default function Home() {
                 <div className="mt-6 flex gap-5">
                 <Link to={"Signup"} relative="path" >
                      <button className="text-white bg-orange-300 px-6 py-2 rounded-md hover:bg-cyan-500 transition-all ease-in">SIGNUP</button>
-                </Link>  
+                </Link> 
+                <Link to="/signin">
                     <button className="text-white bg-blue-500 px-6 py-2 rounded-md">SIGNIN</button>
+                </Link> 
                 </div>
                 <p className="text-center mt-4">already a member? <a href="">SignIn...</a> </p>
             </div>
