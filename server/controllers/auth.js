@@ -15,19 +15,19 @@ export const signup = async (req, res) => {
         } = req.body;
 
         const salt = await bcrypt.genSalt();
-        const passwordHash = await bcrypt.hash(password);
+        const passwordHash = await bcrypt.hash(password, salt);
 
         const newUser = new User({
-            firstName,
-            lastName,
-            email,
+            firstName ,
+            lastName ,
+            email ,
             password: passwordHash
         });
 
         const savedUser = await newUser.save();
         res.status(201).json(savedUser);
     } catch (err) {
-        res.status(500).json({error: error.message})
+        res.status(500).json({error: err.message})
     }
 };
 
@@ -40,8 +40,10 @@ export const signin = async (req,res)=>{
         const user = await User.findOne({email: email});
         if(!user) return res.status(400).json({msg: "User does not exist"});
         
-        const isMatch = await bcrypt.compare(password, passwordHash);
+        const isMatch = await bcrypt.compare(password, user.password);
         if(!isMatch) return res.status(400).json({msg: "Invalid Credentials"});
+
+        // SET UP COOKIE //
 
         const token = jwt.sign({id: user._id}, process.env.JWT_SECRET);
         delete user.password;
