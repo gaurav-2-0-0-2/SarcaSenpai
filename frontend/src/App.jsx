@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import {Routes, Route} from 'react-router-dom';
-import Signup from './components/Signup';
-import Signin from "./components/Signin";
-import Home from './components/Home';
-import Profile from './components/Profile';
+import Signup from './routes/Signup';
+import Signin from "./routes/Signin";
+import Home from './routes/Home';
+import Profile from './routes/Profile';
 
 function App() {
 
